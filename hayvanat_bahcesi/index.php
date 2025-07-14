@@ -51,7 +51,6 @@ class Kedigil extends Hayvan
 
 class Kemirgen extends Hayvan
 {
-    //test
     public function getDosage()
     {
         return $this->agirlik * 0.01 . " mg ilaç";
