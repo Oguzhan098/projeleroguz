@@ -1,0 +1,18 @@
+body {
+    font-family: Arial;
+    padding: 20px;
+    background: #f5f5f5;
+}
+.product-list {
+    display: flex;
+    gap: 20px;
+}
+.product {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+button {
+    padding: 5px 10px;
+}

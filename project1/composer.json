@@ -1,0 +1,16 @@
+{
+    "name": "btekintort01/cms",
+    "autoload": {
+        "psr-4": {
+            "APP\\": "./App",
+            "Core\\": "./Core"
+        }
+    },
+    "authors": [
+        {
+            "name": "root",
+            "email": "erdi@erdi.com"
+        }
+    ],
+    "require": {}
+}
