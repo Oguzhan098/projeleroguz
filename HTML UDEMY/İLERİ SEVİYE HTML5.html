@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="width=devide-width, initial-scale=1.0" >
+    <title>Block & Inline Elements</title>
+
+    <style>
+        h1{
+            width: 100px;
+            height: 100px;
+        }
+
+        a{
+            width: 100px;
+            height: 100px;
+        }
+
+        span {
+            border : 1px solid red;
+        }
+        div{
+            border : 1px solid green;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            padding: 50px;
+        }
+        #box1 {
+            background: red;
+        }
+        #box2 {
+            background: blue;
+        }
+        #box3 {
+            background: yellow;
+        }
+        #box4 {
+            background: green;
+        }
+        #box5{
+            background: purple;
+        }
+    </style>
+</head>
+<body>
+
+                                           <!--Block & Inline Elements-->
+
+<h1>Başlık 1</h1>
+
+<a href="link">link</a>
+<!--Blok elemanlar genişligi içindeki blogun hepsini kapsayan elemanlar anlamına geliyor.
+     Inline'da sadece içerigi kadar yer kaplayan elemanlar anlamına geliyor. -->
+
+<!-- NOT: mesela biz h1'e width(genişilik) ve height(yükseklik) versek blok elemanlarında geçerli olur ama
+Inline elemanlarda geçerli olmaz. Style ile verelim görelim -->
+
+                                                                            <br> <!--Div ve Span etiketleri -->
+                                                                            <hr>
+                                                                            <br>
+
+    <div>Bu bir div</div>
+    <span>Bu bir span</span>
+<!-- div blok level bir element span ise inline level eleman ikisi arasındaki fark budur.
+HTML elementlerini gruplamak için kullanılan iki tane elementimiz.
+Tarayıcıda F12 ve mouse ucundan incelediginde görebiliriz blok(div) ve inline(span) olduklarını
+ÖRNEK ÜZERİNDE FARKINI ANLAYALIM.
+-->
+
+<pre>
+    Korkma, <span>sönmez bu şafaklarda yüzen</span> al sancak;
+    Sönmeden yurdumun üstünde tüten en son ocak.
+    benim milletimin <div>yıldızıdır</div>, parlayacak;
+    O benimdir, o benim milletimindir ancak.
+
+</pre>
+
+<!-- görüldügü üzere belli bir yeri sadece işaretleyeceksek span ama tüm satırı kapsayacaksa div kullanırız. -->
+
+
+                                                                               <br> <!--Id ve Class Nedir -->
+                                                                               <hr>
+                                                                               <br>
+
+<div id = "navbar"></div>
+<div id = "main"></div>
+    <ul>
+        <li class = "article-item"></li>
+        <li class = "article-item"></li>
+        <li class = "article-item"></li>
+    </ul>
+<div id ="footer"></div>
+
+<!-- Bir elemanımızın bir den fazla class ı olabılır fakar bir tane id'si olması gerekiyor.-->
+
+                                                                                   <br> <!--HTML Link - Bookmark Özelliği -->
+                                                                                   <hr>
+                                                                                   <br>
+
+<!-- sayfa içinden nasıl link verecegimizi görecegiz. Bir sitede tıkladıgımızda o tıkladıgımız yeri incele diyerek görebiliriz
+fakat biz kendi sayfamızdan bir örnek yapalım. -->
+
+<ul>
+    <li><a href="#box1">Box 1</a> </li>
+    <li><a href="#box2">Box 2</a> </li>
+    <li><a href="#box3">Box 3</a> </li>
+    <li><a href="#box4">Box 4</a> </li>
+    <li><a href="#box5">Box 5</a> </li>
+</ul>
+<div id="box1" class="box">BOX 1</div>
+<div id="box2" class="box">BOX 2</div>
+<div id="box3" class="box">BOX 3</div>
+<div id="box4" class="box">BOX 4</div>
+<div id="box5" class="box">BOX 5</div>
+
+<!-- 2 sayfadan devam edelim -->
+
+</body>
+</html>

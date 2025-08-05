@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="width=devide-width, initial-scale=1.0" >
+    <title>HTML5 Formatting</title>
+
+    <style>
+        tablo,th,td {
+
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+
+</head>
+<body style="background-color: lightblue;">
+                                                                            <BR> <!--Meta etiketleri ve yorumları-->
+                                                                            <HR> <!--Başlık ve paragraflar-->
+                                                                            <BR> <!--Formatlama etiketleri-->
+<h1>İSTİKLAL MARŞI</h1>
+<h2 style="color:red;front-size:30px">İSTİKLAL MARŞI</h2>
+<h3>İSTİKLAL MARŞI</h3>
+
+<p style="front-size: 40px;">
+    İstiklâl Marşı, Türkiye ve <br>
+    Kuzey Kıbrıs <strong>Türk Cumhuriyeti'nin</strong> millî marşı.
+    Güftesi, <em>Anadolu'da</em> Millî Mücadele'nin <small>devam
+    ettiği </small>sırada <mark>Mehmet Âkif Ersoy </mark>tarafından
+    kaleme alınmış şiirdir.
+    </p>
+<hr>
+<pre>
+Korkma, sönmez bu şafaklarda yüzen al sancak;
+Sönmeden yurdumun üstünde tüten en son ocak.
+O benim milletimin yıldızıdır, parlayacak;
+O benimdir, o benim milletimindir ancak.
+</pre>
+                                                                            <BR> <!--Linkler-->
+                                                                            <HR> <!--İmges-->
+                                                                            <BR>
+
+<a href="http://www.google.com.tr">Google gitmek için tıkla</a>
+<br>
+<a href="http://www.google.com.tr" target="_blank">Farklı sekmede Google gitmek için tıkla</a>
+<hr>
+
+<img
+        src="https://gsb.gov.tr/dist/images/ataturk-kapak.jpg"
+        height="100"
+        width="200"
+        alt="ATATÜRK"
+/>
+
+<!-- https://www.w3schools.com/html/html_formatting.asp
+
+buradan sen kullanacagın başka keyleri görebilirsin
+
+-->
+<hr>
+
+<img
+    src="meteryaller/ataturk.jpg"
+    height="100"
+    width="100"
+    alt="Ataturk"
+    />
+<br>
+<a href="https://tr.wikipedia.org/wiki/Mustafa_Kemal_Atat%C3%BCrk"target="_blank">
+   ATATÜRK Vikipedi Ansiklopedi
+</a>
+                                                                <BR>
+                                                                <HR> <!--Table-->
+                                                                <BR>
+<table>
+    <thead>
+    <tr>
+        <th>NAME</th>
+        <th>DEPARTMAN</th>
+        <th>SALARY</th>
+    </tr>
+    </thead>
+
+
+<tbody>
+</tr>
+<td>Oğuzhan</td>
+<td>BİLİŞİM</td>
+<td>1000</td>
+</tr>
+
+</tr>
+<td>Oğuzhan</td>
+<td></td>
+<td>1000</td>
+</tr>
+
+
+</tbody>
+
+</table>
+                                                                        <BR> <!--Lists-->
+                                                                        <HR>
+                                                                        <BR>
+
+<!-- html5 Unordered Lists -->
+<ul>
+<li>Front End</li>
+<li>Back And</li>
+</ul>
+
+<ul typeof="square">
+    <li>Front End</li>
+        <ul>
+            <li>REACT</li>
+            <li>Vue</li>
+            <li>Angular</li>
+        </ul>
+
+    <!-- html5 Ordered Lists -->
+
+    <li>Back And</li>
+        <ol>
+            <li>Pyhton</li>
+            <li>Java</li>
+            <li>C+</li>
+        </ol>
+</ul>
+                                                                <BR> <!--Video etiketi-->
+                                                                <HR><!--audio etiketi-->
+                                                                <BR>
+<video src="./Remambrance"
+
+        width="400" height="240" controls></video>
+
+    <!--VİDEO KLASÖRÜ EKLEYİP MP4 VB AÇABİLİRİN ./ ŞEKLİNDE YOUTUBE'DE AÇABİLMEN İÇİN <iframe> kullanmalısın -->
+
+<iframe width="320" height="240"
+        src="https://www.youtube.com/embed/C-wu2VcYNCA"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+
+</iframe>
+
+
+<audio src="./audios/Remem.mp3" controls></audio>
+
+<audio controls>
+    <source src="./audios/remem.mp3" type="audio/mpeg">
+    Tarayıcınız audio etiketi desteklemiyor.
+</audio>
+</body>
+</html>
