@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Değişken Tanımlama - var let const</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>var, let, const Farkları</h1>
+<div class="container">
+  <button onclick="calistir()">Çalıştır</button>
+  <div id="sonuc"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
+
+<!--
+Özellik	                            var	                      let	                  const
+Scope	                         Function Scope	           Block Scope	             Block Scope
+Yeniden atanabilir mi?	            ✅ Evet	                  ✅ Evet	              ❌ Hayır (sabit)
+Tekrar tanımlanabilir mi?	        ✅ Evet	                  ❌ Hayır	              ❌ Hayır
+Hoisting (yukarı çekme)	        ✅ Evet (undefined)	    ✅ Evet (ama erişilemez)	    ✅ Evet (ama erişilemez)
+
+✅ Örnek Anlamı:
+var değişkeni blok içinde yeniden tanımlandığında orijinalini değiştirir.
+
+let blok içinde yeni bir değişken gibi çalışır.
+
+const ise hiç değiştirilemez, sabittir.
+-->
