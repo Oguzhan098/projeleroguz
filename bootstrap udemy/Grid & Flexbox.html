@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Grid & Flexbox</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Container: Sayfa içeriğini ortalar ve kenar boşluklarını ayarlar -->
+<div class="container mt-4">
+
+  <h1 class="text-center mb-4">Bootstrap Grid & Flexbox</h1>
+
+  <!-- Grid Sistemi -->
+  <div class="row">
+    <div class="col-md-4 bg-primary text-white p-3">
+      Sütun 1 (Medium ekranlarda 4 birim)
+    </div>
+    <div class="col-md-4 bg-success text-white p-3">
+      Sütun 2 (Medium ekranlarda 4 birim)
+    </div>
+    <div class="col-md-4 bg-danger text-white p-3">
+      Sütun 3 (Medium ekranlarda 4 birim)
+    </div>
+  </div>
+
+  <!--
+
+row	          Sütunları yatayda düzenler
+col-md-4	  Medium ekran ve üzeri için 4 birim(%33) genişlik verir
+bg-*	      Arka plan renkleri (primary, success, danger)
+text-white	  Yazı rengini beyaz yapar
+p-3	          İç boşluk (padding) ekler
+
+-->
+
+
+  <!-- Flexbox Kullanımı -->
+  <div class="
+  d-flex
+  justify-content-between
+  align-items-center
+  bg-secondary
+  text-white
+  p-3
+  mt-4">
+    <div> left</div>
+    <div> middle</div>
+    <div> right</div>
+  </div>
+
+<!--
+
+d-flex	                  Bu elementi bir Flex Container yapar. İçindeki elemanlar yatay eksende hizalanır.
+justify-content-between	  İçerideki elemanlar sol, ortası boş, sağ olacak şekilde yayılır (aralarında maksimum boşluk bırakılır).
+align-items-center	      Yükseklik boyunca (dikeyde) içerikleri ortalar.
+bg-secondary	          Arka plan rengini gri yapar (Bootstrap’in secondary rengi).
+text-white	              Yazı rengini beyaz yapar.
+p-3	                      Her kenardan 1rem iç boşluk (padding) verir.
+mt-4	                  Üstten 1.5rem dış boşluk (margin-top) verir.
+
+-->
+
+  <!-- Responsive Grid -->
+  <div class="row mt-4">
+    <div class="col-12 col-sm-6 col-md-4 bg-warning p-3">
+      📱 Küçük ekran: %100, Orta: %50, Büyük: %33
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 bg-info text-white p-3">
+      📱 Küçük ekran: %100, Orta: %50, Büyük: %33
+    </div>
+    <div class="col-12 col-sm-12 col-md-4 bg-dark text-white p-3">
+      📱 Her ekranda farklı oranlarda görünür
+    </div>
+  </div>
+
+<!--
+col-12           En küçük ekranlarda (mobilde) tüm satırı (12 sütun) kapla
+col-sm-6         576px üzeri küçük ekranlarda (tablet) yarım satır (6 sütun) kapla
+col-md-4         768px üzeri orta ekranlarda (laptop, büyük tablet) üçte birini (4 sütun) kapla
+-->
+
+</div>
+
+</body>
+</html>
+
+<!--
+
+.container:	                    Sayfa içeriğini ortalar ve kenar boşluklarını ayarlar
+.row:                       	Satır oluşturur
+.col-md-4:              	    Orta ekran ve üzerinde 12'lik sistemde 4 birim kaplayan sütun
+.d-flex:                      	Flex container yapar
+.justify-content-between:   	İçerikleri sağa ve sola yaslar, araya boşluk bırakır
+.align-items-center:            Yükseklik açısından ortalama yapar
+col-12 col-sm-6 col-md-4:	    Farklı ekran boyutlarında farklı sütun genişliği sağlar (responsive)
+
+-->
+

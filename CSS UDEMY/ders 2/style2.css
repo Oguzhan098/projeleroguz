@@ -1,0 +1,45 @@
+/* .box-1 {
+  background-color: green;
+}
+
+.box-2 {
+  width: 500px;
+  height: 500px;
+  background-color: yellow;
+  background-image: url('../meteryaller/1080.jpg');
+  background-size: cover;                               " orjinal resim verdigimiz oranda sıgmaya çalışacak. "
+}
+ */
+
+ body{
+ background-image: url("../meteryaller/logo.png");
+ width: 300px;
+ height: 366px;
+ background-size:  100px;
+ background-repeat:no-repeat;                     /*Arka plan resmi tekrar etmez. Aksi halde küçük bir resim tüm sayfaya döşenirdi.*/
+ background-position: right top;
+ background-attachment:fixed;                        /*Arka plan resmi sayfa kaydırılsa bile sabit kalır, ekranla birlikte hareket eder.*/
+
+  border-width: 20px;
+  border-color:black;
+  border-style: solid;                                /*Tüm kenarlara 20px kalınlığında siyah düz çerçeve uygulanır.*/ 
+
+  border-right: 5px solid black;
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+
+
+ }
+
+.daire {
+ width: 150px;
+ height: 150px;
+
+ border: 10px solid black;                            /*Kalınlığı 10px olan siyah bir çerçeve çizer.*/
+
+ border-radius: 50%;                                  /*Köşeleri %50 oranında yuvarlar → çember oluşur. Kare üzerinde uygulanırsa daire olur.*/
+
+ background-color: transparent;                       /* Arka plan şeffaf olur, yani içi boş görünür.*/
+}
+
