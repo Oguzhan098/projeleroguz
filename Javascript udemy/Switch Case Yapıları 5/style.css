@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+input, button {
+    margin: 10px;
+    padding: 8px;
+}
+
+p {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: darkblue;
+}
