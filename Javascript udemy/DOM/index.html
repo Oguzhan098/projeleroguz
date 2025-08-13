@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>JS DOM Temel İşlemler Örneği</title>
+    <style>
+        .kirmizi { color: red; }
+        .buyuk { font-size: 24px; }
+        #kutucuk { border: 1px solid black; padding: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1 id="baslik">Merhaba Dünya!</h1>
+<p class="paragraf">Bu bir paragraf.</p>
+<p class="paragraf">İkinci paragraf.</p>
+
+<button id="btnDegistir">Başlığı Değiştir</button>
+<button id="btnEkle">Yeni Paragraf Ekle</button>
+<button id="btnSil">İlk Paragrafı Sil</button>
+
+<div id="kutucuk">
+    <input type="text" id="inputMetin" placeholder="Bir şey yaz..." />
+    <button id="btnEkleListe">Listeye Ekle</button>
+    <ul id="liste"></ul>
+</div>
+
+<form id="formOrnek">
+    <input type="text" id="inputAd" placeholder="Adınız" required />
+    <button type="submit">Gönder</button>
+</form>
+
+<script src="app.js"></script>
+</body>
+</html>
