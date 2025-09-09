@@ -7,94 +7,76 @@ class FlightModel {
     }
 
     public function getAllFlights() {
-        $stmt = $this->pdo->query("
+        $sql = "
             SELECT 
                 f.*,
                 p.brand,
                 p.model,
-                a.name AS airport_name,
-                f.first_name,
-                f.last_name,
-                f.age,
-                f.gender
+                a.name AS airport_name
             FROM flights f
-            JOIN plane p ON f.plane_id = p.id
-            JOIN airport a ON f.airport_id = a.id
-            LEFT JOIN flight_person fp ON fp.flight_id = f.id
-            LEFT JOIN person per ON per.id = fp.person_id
-            ORDER BY f.id desc 
-        ");
-
-        $flightsRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $flights = [];
-
-        foreach ($flightsRaw as $row) {
-            $id = $row['id'];
-
-            if (!isset($flights[$id])) {
-                $flights[$id] = $row;
-                $flights[$id]['passengers'] = [];
-            }
-
-            if ($row['first_name']) {
-                $flights[$id]['passengers'][] = [
-                    'first_name' => $row['first_name'],
-                    'last_name'  => $row['last_name'],
-                    'age'        => $row['age'],
-                    'gender'     => $row['gender']
-                ];
-            }
-        }
-
-        return array_values($flights);
+            LEFT JOIN plane p ON f.plane_id = p.id
+            LEFT JOIN airport a ON f.airport_id = a.id
+            ORDER BY f.id DESC
+        ";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function addFlight($data) {
-        $stmt = $this->pdo->prepare("
+    public function addFlight(array $data) {
+        $sql = "
             INSERT INTO flights (
-                                 first_name, 
-                                 last_name, 
-                                 age, 
-                                 gender,
-                         
-                departure, 
-                arrival, 
-                departure_date, 
-                departure_time, 
-                arrival_date, 
-                arrival_time, 
-                plane_id, 
-                airport_id, 
-                passenger_count
+                first_name, last_name, age, gender,
+                departure, arrival, departure_date, departure_time, arrival_date, arrival_time,
+                plane_id, airport_id, passenger_count
             ) VALUES (
-               :first_name, :last_name, :age, :gender, :departure, :arrival, :departure_date, :departure_time, :arrival_date, :arrival_time, :plane_id, :airport_id, :passenger_count
+                :first_name, :last_name, :age, :gender,
+                :departure, :arrival, :departure_date, :departure_time, :arrival_date, :arrival_time,
+                :plane_id, :airport_id, :passenger_count
             )
-        ");
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        $params = [
+            ':first_name'      => $data['first_name'] !== '' ? $data['first_name'] : null,
+            ':last_name'       => $data['last_name'] !== '' ? $data['last_name'] : null,
+            ':age'             => $data['age'] !== null ? $data['age'] : null,
+            ':gender'          => $data['gender'] !== '' ? $data['gender'] : null,
+            ':departure'       => $data['departure'],
+            ':arrival'         => $data['arrival'],
+            ':departure_date'  => $data['departure_date'],
+            ':departure_time'  => $data['departure_time'],
+            ':arrival_date'    => $data['arrival_date'],
+            ':arrival_time'    => $data['arrival_time'],
+            ':plane_id'        => $data['plane_id'],
+            ':airport_id'      => $data['airport_id'],
+            ':passenger_count' => $data['passenger_count'] ?? 1,
+        ];
 
-        return $stmt->execute([
-            ':first_name'      => $data['first_name'],
-            ':last_name'      => $data['last_name'],
-            ':age'      => $data['age'],
-            ':gender'      => $data['gender'],
-            ':departure'      => $data['departure'],
-            ':arrival'        => $data['arrival'],
-            ':departure_date' => $data['departure_date'],
-            ':departure_time' => $data['departure_time'],
-            ':arrival_date'   => $data['arrival_date'],
-            ':arrival_time'   => $data['arrival_time'],
-            ':plane_id'       => $data['plane_id'],
-            ':airport_id'     => $data['airport_id'],
-            ':passenger_count'=> $data['passenger_count'] ?? 1
-        ]);
+        $ok = $stmt->execute($params);
+        if (!$ok) {
+
+            return false;
+        }
+
+        return $this->pdo->lastInsertId();
+    }
+
+    public function deleteFlight($id) {
+        $stmt = $this->pdo->prepare("DELETE FROM flights WHERE id = ?");
+        return $stmt->execute([(int)$id]);
+    }
+
+    public function clearFlights() {
+        $this->pdo->exec("TRUNCATE TABLE flights RESTART IDENTITY CASCADE");
+        return true;
     }
 
     public function getPlanes() {
-        $stmt = $this->pdo->query("SELECT * FROM plane");
+        $stmt = $this->pdo->query("SELECT * FROM plane ORDER BY id");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAirports() {
-        $stmt = $this->pdo->query("SELECT * FROM airport");
+        $stmt = $this->pdo->query("SELECT * FROM airport ORDER BY id");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
