@@ -1,0 +1,104 @@
+/* Genel Ayarlar */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+.header {
+    background-color: #007BFF;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+.top-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.top-menu ul li {
+    position: relative;
+    margin-left: 20px;
+}
+.top-menu ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+.top-menu ul li:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #0056b3;
+    min-width: 150px;
+    z-index: 100;
+}
+.dropdown-content li {
+    margin: 0;
+}
+.dropdown-content li a {
+    display: block;
+    padding: 10px;
+}
+
+/* Slider */
+.slider {
+    width: 80%;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+}
+.slide {
+    width: 100%;
+    display: none;
+}
+
+/* Container */
+.container {
+    display: flex;
+    margin: 20px;
+}
+
+/* Sol Menü */
+.sidebar {
+    width: 20%;
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 5px;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+.sidebar ul li a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+/* İçerik */
+.content {
+    width: 80%;
+    margin-left: 20px;
+}
+
+/* Footer */
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}

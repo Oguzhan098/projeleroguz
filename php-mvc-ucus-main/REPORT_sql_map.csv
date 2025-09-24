@@ -1,0 +1,15 @@
+file,tables,has_db_conn
+ucus_tam_proje/app/routes.php,,False
+ucus_tam_proje/app/services/AirportService.php,airport,True
+ucus_tam_proje/app/services/FlightService.php,"flight_person,flights",True
+ucus_tam_proje/app/services/PlaneService.php,plane,True
+ucus_tam_proje/app/services/PersonService.php,person,True
+ucus_tam_proje/app/views/flights/new.php,"airport,person,plane",True
+ucus_tam_proje/app/views/flights/index.php,"flight_person,flights",True
+ucus_tam_proje/app/views/flights/passengers.php,"flight_person,flights,person",True
+ucus_tam_proje/app/views/airports/new.php,,True
+ucus_tam_proje/app/views/airports/index.php,airport,True
+ucus_tam_proje/app/views/planes/new.php,,True
+ucus_tam_proje/app/views/planes/index.php,plane,True
+ucus_tam_proje/app/views/people/new.php,,True
+ucus_tam_proje/app/views/people/index.php,person,True

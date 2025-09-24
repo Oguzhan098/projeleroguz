@@ -1,14 +1,30 @@
 // ================= While Döngüsü =================
 let i = 1;
-let whileOutput = "";
+let whileOutput = "";     //Bu değişken, döngü sırasında oluşan metinleri biriktirmek için kullanılacak.
+                                  //HTML’de sonuçları göstermek için kullanılacak.
 
 while (i <= 5) {
     console.log("While döngüsü: " + i);
-    whileOutput += "While döngüsü: " + i + "<br>";
-    i++;
+    whileOutput += "While döngüsü: " + i + "<br>";            //whileOutput değişkenine yeni metin ekler.
+                                                              // += kullanımı: önceki içeriğe ekleme yapar.
+    i++;                                                      //i değerini 1 artırır.
 }
 
-document.getElementById("whileResult").innerHTML = whileOutput;
+document.getElementById("whileResult").innerHTML = whileOutput;           //HTML sayfasında id="whileResult" olan div veya element seçilir.
+                                                                                     //innerHTML ile döngü sonucu HTML olarak eklenir.
+                                                                                         //<br> etiketleri sayesinde metin satır satır görünür.
+
+/*
+✅ Özet Akış:
+
+i = 1 ile başla.
+while (i <= 5) koşulu true olduğu sürece:
+Konsola yaz (console.log)
+whileOutput değişkenine ekle (+=)
+Sayacı 1 artır (i++)
+Döngü bittiğinde whileOutput HTML elementine aktarılır ve sayfada görünür.
+*/
+
 
 
 // ================= Do While Döngüsü =================
@@ -46,4 +62,6 @@ En az 1 kez çalışması garanti.
 
        For Döngüsü
 Başlangıç değeri, koşul ve artırma/azaltma tek satırda tanımlanır.
-Genelde sabit sayıda tekrar için kullanılır.  */
+Genelde sabit sayıda tekrar için kullanılır.
+
+*/

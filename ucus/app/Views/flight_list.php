@@ -101,18 +101,36 @@ usort($flights, function($a, $b) {
         </tr>
 
         <?php if(!empty($flights)): ?>
-            <?php foreach($flights as $f): ?>
+            <?php foreach($flights as $index => $f): ?>
                 <tr>
-                    <td><?= htmlspecialchars($f['id']) ?></td>
+                    <td><?= $index + 1 ?></td> 
                     <td><?= htmlspecialchars($f['first_name'] ?? '-') ?></td>
                     <td><?= htmlspecialchars($f['last_name'] ?? '-') ?></td>
                     <td><?= htmlspecialchars($f['age'] ?? '-') ?></td>
                     <td><?= htmlspecialchars($f['gender'] ?? '-') ?></td>
                     <td><?= htmlspecialchars($f['departure'] ?? '-') ?></td>
                     <td><?= htmlspecialchars($f['arrival'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($f['departure_date'] ?? '-') ?></td>
+                    <td>
+                        <?php
+                        if (!empty($f['departure_date'])) {
+                            $dt = new DateTime($f['departure_date']);
+                            echo $dt->format('d.m.Y');
+                        } else {
+                            echo '-';
+                        }
+                        ?>
+                    </td>
                     <td><?= htmlspecialchars($f['departure_time'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($f['arrival_date'] ?? '-') ?></td>
+                    <td>
+                        <?php
+                        if (!empty($f['arrival_date'])) {
+                            $dt = new DateTime($f['arrival_date']);
+                            echo $dt->format('d.m.Y');
+                        } else {
+                            echo '-';
+                        }
+                        ?>
+                    </td>
                     <td><?= htmlspecialchars($f['arrival_time'] ?? '-') ?></td>
                     <td><?= htmlspecialchars(($f['brand'] ?? '') . ' ' . ($f['model'] ?? '')) ?></td>
                     <td><?= htmlspecialchars($f['airport_name'] ?? '-') ?></td>

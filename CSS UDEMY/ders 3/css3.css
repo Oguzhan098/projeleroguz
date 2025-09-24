@@ -1,0 +1,47 @@
+/* div#box-1{
+    width: 25%;
+    height: 100px;
+    background-color: #a7a7a7;
+
+    margin: auto;
+}
+
+div#box-2{
+    width: 50%;
+    height: 50px;
+    background-color: red;
+
+    margin-left: 50px;                  soldan 50px'lik boşluk bırakır
+    margin-right: 50px;
+    margin-top:  50px;
+    margin-bottom: 50px;
+    margin: 50px 50px 50px 50px;
+
+    margin: auto;
+} */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+div.box-1 {
+    width: 300px;
+    height: 150px;
+    border: 10px solid blue;
+    padding: 30px;
+    background-color: lightyellow;
+
+  /*  padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top:  20px;
+    padding: 20px 20px 20px 20px;
+    padding: 20px;
+
+     */
+}
+
+
+
+

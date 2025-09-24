@@ -1,0 +1,12 @@
+.baslik {
+    font-size: 36px;                /* Büyük başlık */
+}
+
+.paragraf {
+    font-size: 18px;        /* Normal paragraf */
+    line-height: 24px;
+    line-height: 1.5em;      /* Her satırın yüksekliği, yazının kendi boyutunun 1.5 katı kadar olacak demektir.
+                                    w3schools'dan CSS Units'den bakabilirsin em ex ch rem vw vh vmin vmax   %*/
+}
+
+/* css icons font awesome'dan bakabilirsin */

@@ -1,0 +1,66 @@
+/* h1 {
+    color : red;
+    background: blue;
+} */
+
+/* p{
+    color: red;
+    background: blue;
+} */
+
+/* h1, p {
+    color: red;
+    background: blue;
+} */                                /* h1 ve p aynı anda*/
+
+/* #logo {
+    color: red;
+    background: blue;
+}  */                              /* logo seçerken # koyarız */
+
+/* .info {
+    color: red;
+    background-color: yellow;
+}  */                               /*class içindekileri seçerken . koyuyoruz*/
+
+/* #logo, .lead {
+    color: red;
+    background: blue;
+}  */                                /*hem logo hem class içindekileri seçerken bu şekilde seçeriz
+                                        .info üç satırda renklenirdi */
+/* a {
+    text-decoration: none;
+}   */                                   /* a etiketinin altındaki çizgileri kaldıkrdık */
+
+/* ul li a {
+    text-decoration: none;
+}  */                                 /* ul nin içindeki li nin içindeki a etiketini seçebiliyoruz.*/
+
+/* .info span {
+    color : red;
+    background: blue;
+}       */                                      /*classı infor içindeki span böyle seçiyoruz */
+
+/* .info .primary {
+    color: red;
+} */                         /* hiyeraşık yapıya göre class içindeki info oradan da primay bu şekilde yapılır.*/
+
+
+/* hiyeraşik düzen aşagıdan yukarı dogrudur yani yukarıda h1 color: red; yazdık aşagısına color: blue; yazdık blue olur
+en seçicimizi üstte koymak özel seçicilerimizide alt trafa koymak olur
+peki üstte yazdıgımız kod alltaki kodu ezmesini istiyorsak important vermemeiz lazım
+Aynı şekilde css2 eklersem ve head etiketine style2.css eklersem css2 css1'i ezer.*/
+
+/*
+h1{
+    color: rgb(100,100,100);
+    opacity: 0.8;                           /*bulanıklık degeri  veya rgb(* * * *) 4. deger olarak da girebilirsin */
+}  */                                                    /* color size ayarlama yöntemi (colorZila yükleyip renk kodlarını ögrenebilirsin*/
+
+ /* h1{
+    color: 0000;
+}                                           /* 16 sayı sisteminde f4f4f4=gri 0000=siyah gibi vs */
+*/
+
+/* bir web tarayıcısında incele tuşuna basarak bir yazı stilini slect ile seçip style vs hepsine consoleden bakabilirsin */
+

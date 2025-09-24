@@ -22,7 +22,7 @@
 
   border-width: 20px;
   border-color:black;
-  border-style: solid;                                /*Tüm kenarlara 20px kalınlığında siyah düz çerçeve uygulanır.*/ 
+  border-style: solid;                                /*Tüm kenarlara 20px kalınlığında siyah düz çerçeve uygulanır.*/
 
   border-right: 5px solid black;
   margin: 0;
