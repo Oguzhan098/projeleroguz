@@ -20,7 +20,6 @@ final class Url
         $noRewrite = (bool) Container::get('app.noRewrite', false);
         $p = '/' . ltrim($path, '/'); // /movements
 
-        // ABSOLUTE URL üret (baseUrl + path)
         if ($noRewrite) {
             // http://localhost/osb_gate_mvc/public/index.php?r=/movements
             return self::baseUrl() . '/index.php?r=' . ltrim($p, '/');

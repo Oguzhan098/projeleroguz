@@ -1,35 +1,32 @@
-<h2>Günlük Rapor</h2>
+<h2>Manuel Hareket</h2>
 
-<p>
-    <a role="button" class="secondary" href="<?= htmlspecialchars(\App\Core\Url::to('/')) ?>">Gösterge Paneli</a>
-    <a role="button" href="<?= htmlspecialchars(\App\Core\Url::to('/movements')) ?>">Hareket Listesi</a>
-</p>
+<form method="post" action="<?= htmlspecialchars(\App\Core\Url::to('/movements')) ?>">
+    <div class="grid">
+        <label>
+            Plaka
+            <input type="text" name="plate" placeholder="34 ABC 123" value="<?= htmlspecialchars($_POST['plate'] ?? '') ?>">
+        </label>
+        <label>
+            Kişi (Ad Soyad)
+            <input type="text" name="person" placeholder="Ad Soyad" value="<?= htmlspecialchars($_POST['person'] ?? '') ?>">
+        </label>
+        <label>
+            Yön
+            <select name="direction">
+                <option value="in"  <?= (($_POST['direction'] ?? '') === 'in'  ? 'selected' : '') ?>>Giriş</option>
+                <option value="out" <?= (($_POST['direction'] ?? '') === 'out' ? 'selected' : '') ?>>Çıkış</option>
+            </select>
+        </label>
+    </div>
 
-<table role="grid">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Giriş</th>
-        <th>Çıkış</th>
-        <th>Yön</th>
-        <th>Plaka</th>
-        <th>Kişi</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php if (!empty($rows)): ?>
-        <?php foreach ($rows as $r): ?>
-            <tr>
-                <td><?= (int)$r['id'] ?></td>
-                <td><?= htmlspecialchars((string)($r['entry_time'] ?? '')) ?></td>
-                <td><?= htmlspecialchars((string)($r['exit_time'] ?? '')) ?></td>
-                <td><?= htmlspecialchars((string)$r['direction']) ?></td>
-                <td><?= htmlspecialchars((string)($r['plate'] ?? '')) ?></td>
-                <td><?= htmlspecialchars((string)($r['full_name'] ?? '')) ?></td>
-            </tr>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <tr><td colspan="6">Bugün için kayıt yok.</td></tr>
-    <?php endif; ?>
-    </tbody>
-</table>
+    <!-- Opsiyonel: Girişten sonra çıkışı otomatik kapat -->
+    <label style="margin-top:8px; display:inline-flex; align-items:center; gap:6px;">
+        <input type="checkbox" name="auto_exit" value="1" <?= !empty($_POST['auto_exit']) ? 'checked' : '' ?>>
+        Girişten sonra çıkışı otomatik işaretle
+    </label>
+
+    <div class="mt-20">
+        <button type="submit">Kaydet</button>
+        <a class="secondary" href="<?= htmlspecialchars(\App\Core\Url::to('/movements')) ?>">Listeye Dön</a>
+    </div>
+</form>
