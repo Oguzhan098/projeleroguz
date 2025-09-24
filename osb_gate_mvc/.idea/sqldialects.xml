@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/database/migrations/20250923_0001_create_companies.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/database/migrations/20250923_0002_create_people.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/database/migrations/20250923_0003_create_vehicles.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/database/migrations/20250923_0004_create_checkpoints.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/database/migrations/20250923_0005_create_passes.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/database/migrations/20250923_0006_create_movements.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/database/migrations/20250923_0007_create_blacklist.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/database/migrations/20250923_0008_create_users_roles.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/database/migrations/20250923_0009_create_schedules.sql" dialect="PostgreSQL" />
+  </component>
+</project>

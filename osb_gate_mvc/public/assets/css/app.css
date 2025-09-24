@@ -1,0 +1,37 @@
+/* public/assets/css/app.css */
+
+/* Genel yerleşim */
+body { max-width: 1200px; margin: 40px auto; padding: 0 12px; }
+
+/* Tablo */
+table td, table th { white-space: nowrap; }
+
+/* Navbar */
+nav ul { align-items: center; }
+
+/* Kart/istatistik görünümü (dashboard) */
+.stat { font-size: 2rem; margin: 0; }
+
+/* Yardımcılar */
+.mt-20 { margin-top: 20px; }
+
+/* Menü öğelerini sola yasla ve biraz sola çek */
+nav ul { justify-content: flex-start; }        /* sola hizala */
+nav ul + ul { margin-left: 8px; gap: 10px; }   /* ikinci UL (menü) hafif sola/yan yana */
+
+
+/* Genel yerleşim */
+body { max-width: 1200px; margin: 40px auto; padding: 0 12px; }
+
+/* Tablo */
+table td, table th { white-space: nowrap; }
+
+/* Navbar: sola hizala ve menüyü hafif sola kaydır */
+nav ul { align-items: center; justify-content: flex-start; }
+nav ul + ul { margin-left: 8px; gap: 10px; }
+
+/* Kart/istatistik görünümü (dashboard) */
+.stat { font-size: 2rem; margin: 0; }
+
+/* Yardımcılar */
+.mt-20 { margin-top: 20px; }
