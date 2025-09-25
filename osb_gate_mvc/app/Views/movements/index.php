@@ -23,8 +23,21 @@
                 <td><?= (int)$r['id'] ?></td>
                 <td><?= htmlspecialchars((string)($r['entry_time'] ?? '')) ?></td>
                 <td><?= htmlspecialchars((string)($r['exit_time'] ?? '')) ?></td>
-                <td><?= htmlspecialchars((string)$r['direction']) ?></td>
-                <td><?= htmlspecialchars((string)($r['plate'] ?? '')) ?></td>
+                <td>
+                    <?php
+                    // Controller direction_label set ediyor ama yedek olsun:
+                    if (isset($r['direction_label'])) {
+                        echo htmlspecialchars((string)$r['direction_label']);
+                    } else {
+                        if (($r['direction'] ?? '') === 'in') {
+                            echo empty($r['exit_time']) ? 'Giriş' : 'Giriş/Çıkış';
+                        } else {
+                            echo 'Çıkış';
+                        }
+                    }
+                    ?>
+                </td>
+                <td><?= htmlspecialchars((string)($r['plate_tr'] ?? '')) ?></td>
                 <td><?= htmlspecialchars((string)($r['full_name'] ?? '')) ?></td>
             </tr>
         <?php endforeach; ?>
