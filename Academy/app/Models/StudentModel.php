@@ -46,4 +46,36 @@ class StudentModel extends Model
         $stmt = $this->db->prepare('DELETE FROM students WHERE id=:id');
         return $stmt->execute(['id'=>$id]);
     }
+
+    public function searchCount(string $q=''): int
+    {
+        if ($q === '') {
+            return (int)$this->db->query('SELECT COUNT(*) FROM students')->fetchColumn();
+        }
+        $st = $this->db->prepare("SELECT COUNT(*) FROM students
+        WHERE first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q");
+        $st->execute(['q' => '%'.$q.'%']);
+        return (int)$st->fetchColumn();
+    }
+
+    public function searchPaginated(string $q='', int $limit=10, int $offset=0): array
+    {
+        if ($q === '') {
+            $st = $this->db->prepare('SELECT * FROM students ORDER BY id DESC LIMIT :lim OFFSET :off');
+            $st->bindValue(':lim', $limit, \PDO::PARAM_INT);
+            $st->bindValue(':off', $offset, \PDO::PARAM_INT);
+            $st->execute();
+            return $st->fetchAll();
+        }
+        $st = $this->db->prepare("SELECT * FROM students
+        WHERE first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q
+        ORDER BY id DESC LIMIT :lim OFFSET :off");
+        $st->bindValue(':q', '%'.$q.'%');
+        $st->bindValue(':lim', $limit, \PDO::PARAM_INT);
+        $st->bindValue(':off', $offset, \PDO::PARAM_INT);
+        $st->execute();
+        return $st->fetchAll();
+    }
+
+
 }

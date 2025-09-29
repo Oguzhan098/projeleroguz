@@ -21,6 +21,29 @@ class ComposerStaticInited9089a790e3a02864e0b8a9795bfb80
     );
 
     public static $classMap = array (
+        'App\\Controllers\\CoursesController' => __DIR__ . '/../..' . '/app/Controllers/CoursesController.php',
+        'App\\Controllers\\EnrollmentsController' => __DIR__ . '/../..' . '/app/Controllers/EnrollmentsController.php',
+        'App\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Controllers/HomeController.php',
+        'App\\Controllers\\InstructorsController' => __DIR__ . '/../..' . '/app/Controllers/InstructorsController.php',
+        'App\\Controllers\\StudentsController' => __DIR__ . '/../..' . '/app/Controllers/StudentsController.php',
+        'App\\Core\\Controller' => __DIR__ . '/../..' . '/app/Core/Controller.php',
+        'App\\Core\\Csrf' => __DIR__ . '/../..' . '/app/Core/Csrf.php',
+        'App\\Core\\Database' => __DIR__ . '/../..' . '/app/Core/Database.php',
+        'App\\Core\\Flash' => __DIR__ . '/../..' . '/app/Core/Flash.php',
+        'App\\Core\\Helpers' => __DIR__ . '/../..' . '/app/Core/Helpers.php',
+        'App\\Core\\Model' => __DIR__ . '/../..' . '/app/Core/Model.php',
+        'App\\Core\\Request' => __DIR__ . '/../..' . '/app/Core/Request.php',
+        'App\\Core\\Router' => __DIR__ . '/../..' . '/app/Core/Router.php',
+        'App\\Core\\Url' => __DIR__ . '/../..' . '/app/Core/Url.php',
+        'App\\Core\\Validator' => __DIR__ . '/../..' . '/app/Core/Validator.php',
+        'App\\Entities\\Course' => __DIR__ . '/../..' . '/app/Entities/Course.php',
+        'App\\Entities\\Enrollment' => __DIR__ . '/../..' . '/app/Entities/Enrollment.php',
+        'App\\Entities\\Instructor' => __DIR__ . '/../..' . '/app/Entities/Instructor.php',
+        'App\\Entities\\Student' => __DIR__ . '/../..' . '/app/Entities/Student.php',
+        'App\\Models\\CourseModel' => __DIR__ . '/../..' . '/app/Models/CourseModel.php',
+        'App\\Models\\EnrollmentModel' => __DIR__ . '/../..' . '/app/Models/EnrollmentModel.php',
+        'App\\Models\\InstructorModel' => __DIR__ . '/../..' . '/app/Models/InstructorModel.php',
+        'App\\Models\\StudentModel' => __DIR__ . '/../..' . '/app/Models/StudentModel.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

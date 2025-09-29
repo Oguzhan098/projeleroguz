@@ -6,5 +6,28 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controllers\\CoursesController' => $baseDir . '/app/Controllers/CoursesController.php',
+    'App\\Controllers\\EnrollmentsController' => $baseDir . '/app/Controllers/EnrollmentsController.php',
+    'App\\Controllers\\HomeController' => $baseDir . '/app/Controllers/HomeController.php',
+    'App\\Controllers\\InstructorsController' => $baseDir . '/app/Controllers/InstructorsController.php',
+    'App\\Controllers\\StudentsController' => $baseDir . '/app/Controllers/StudentsController.php',
+    'App\\Core\\Controller' => $baseDir . '/app/Core/Controller.php',
+    'App\\Core\\Csrf' => $baseDir . '/app/Core/Csrf.php',
+    'App\\Core\\Database' => $baseDir . '/app/Core/Database.php',
+    'App\\Core\\Flash' => $baseDir . '/app/Core/Flash.php',
+    'App\\Core\\Helpers' => $baseDir . '/app/Core/Helpers.php',
+    'App\\Core\\Model' => $baseDir . '/app/Core/Model.php',
+    'App\\Core\\Request' => $baseDir . '/app/Core/Request.php',
+    'App\\Core\\Router' => $baseDir . '/app/Core/Router.php',
+    'App\\Core\\Url' => $baseDir . '/app/Core/Url.php',
+    'App\\Core\\Validator' => $baseDir . '/app/Core/Validator.php',
+    'App\\Entities\\Course' => $baseDir . '/app/Entities/Course.php',
+    'App\\Entities\\Enrollment' => $baseDir . '/app/Entities/Enrollment.php',
+    'App\\Entities\\Instructor' => $baseDir . '/app/Entities/Instructor.php',
+    'App\\Entities\\Student' => $baseDir . '/app/Entities/Student.php',
+    'App\\Models\\CourseModel' => $baseDir . '/app/Models/CourseModel.php',
+    'App\\Models\\EnrollmentModel' => $baseDir . '/app/Models/EnrollmentModel.php',
+    'App\\Models\\InstructorModel' => $baseDir . '/app/Models/InstructorModel.php',
+    'App\\Models\\StudentModel' => $baseDir . '/app/Models/StudentModel.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
 );

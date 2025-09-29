@@ -1,1 +1,23 @@
 main.container { margin-top: 2rem; }
+/* CTA satırı — yan yana, esnek, mobil uyumlu */
+.cta-row {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+    flex-wrap: wrap;          /* küçük ekranda alta geçsin */
+    margin-top: 1rem;
+}
+
+/* Butonların içeriği hizalı ve ferah olsun */
+.cta-row .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;               /* ikon ile metin arası */
+    padding-inline: 1rem;     /* Pico'da yatay alanı biraz arttır */
+    white-space: nowrap;      /* tek satırda kalsın */
+    font-weight: 600;
+}
+
+/* İsteğe bağlı: küçük ekranlarda ortala */
+@media (max-width: 640px) {
+    .cta-row { justify-content: center }}

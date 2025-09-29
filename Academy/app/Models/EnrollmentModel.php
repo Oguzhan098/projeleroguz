@@ -27,6 +27,11 @@ ORDER BY e.id DESC';
         return (int)$st->fetchColumn();
     }
 
+    public function updateGrade(int $id, ?float $grade): bool
+    {
+        $st = $this->db->prepare('UPDATE enrollments SET grade = :g WHERE id = :id');
+        return $st->execute(['g' => $grade, 'id' => $id]);
+    }
 
     public function delete(int $id): bool
     {

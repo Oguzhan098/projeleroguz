@@ -4,8 +4,11 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Flash;
 use App\Core\Csrf;
+use App\Core\Request;
 use App\Entities\Student;
 use App\Models\StudentModel;
+use App\Core\Url;
+use App\Core\Helpers;
 
 class StudentsController extends Controller
 {
@@ -18,10 +21,23 @@ class StudentsController extends Controller
 
     public function index(): void
     {
-        $students = $this->model->all();
+        $q     = trim((string)Request::get('q', ''));
+        $page  = max(1, (int)Request::get('page', 1));
+        $limit = 10;
+        $total = $this->model->searchCount($q);
+        $pages = max(1, (int)ceil($total / $limit));
+        $page  = min($page, $pages);
+        $offset = ($page - 1) * $limit;
+
+        $students = $this->model->searchPaginated($q, $limit, $offset);
+
         $this->render('students/index', [
-            'title' => 'Öğrenciler',
-            'students' => $students
+            'title'    => 'Öğrenciler',
+            'students' => $students,
+            'q'        => $q,
+            'page'     => $page,
+            'pages'    => $pages,
+            'total'    => $total,
         ]);
     }
 
