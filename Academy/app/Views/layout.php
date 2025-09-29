@@ -22,6 +22,7 @@
 <li><a href="/index.php?r=courses/index">Dersler</a></li>
 <li><a href="/index.php?r=instructors/index">Eğitmenler</a></li>
 <li><a href="/index.php?r=enrollments/index">Kayıtlar</a></li>
+    <li><a href="/index.php?r=custodians/index">Veliler</a></li>
 </ul>
 </nav>
 </header>

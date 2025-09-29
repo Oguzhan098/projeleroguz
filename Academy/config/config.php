@@ -7,6 +7,6 @@ return [
         'password' => 'postgres'
     ],
     'app' => [
-        'base_url' => '/' // gerekirse link üretimi için
+        'base_url' => '/'
     ]
 ];

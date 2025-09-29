@@ -16,6 +16,7 @@
         <a role="button" class="cta primary" href="/index.php?r=students/index">🧑‍🎓 Kayıt Olun</a>
         <a role="button" class="cta contrast" href="/index.php?r=courses/index">📚 Derslere Göz Atın</a>
         <a role="button" class="cta secondary" href="/index.php?r=instructors/index">👩‍🏫 Eğitmenlerimiz</a>
+        <a role="button" class="cta secondary" href="/index.php?r=custodians/index">👩‍🏫👩‍🏫 Veliler</a>
     </div>
 
 </article>

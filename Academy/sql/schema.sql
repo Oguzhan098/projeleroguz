@@ -39,6 +39,16 @@ CREATE TABLE IF NOT EXISTS enrollments (
     UNIQUE(student_id, course_id)
     );
 
+CREATE TABLE IF NOT EXISTS custodians (
+                                        id SERIAL PRIMARY KEY,
+                                        first_name VARCHAR(100) NOT NULL,
+                                        last_name VARCHAR(100) NOT NULL,
+                                        registered_at DATE DEFAULT CURRENT_DATE,
+                                        created_at TIMESTAMPTZ DEFAULT NOW(),
+                                        updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
 
 -- Faydalı indexler
 CREATE INDEX IF NOT EXISTS idx_courses_instructor ON courses(instructor_id);
