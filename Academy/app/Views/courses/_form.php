@@ -19,6 +19,8 @@ $iid   = $old['instructor_id'] ?? ($course['instructor_id'] ?? 0);
 <label>Açıklama
     <textarea name="description"><?= htmlspecialchars($desc) ?></textarea>
 </label>
+
+
 <label>Eğitmen
     <select name="instructor_id">
         <option value="0">Seçilmedi</option>

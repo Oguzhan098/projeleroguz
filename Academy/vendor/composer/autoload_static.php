@@ -22,6 +22,7 @@ class ComposerStaticInited9089a790e3a02864e0b8a9795bfb80
 
     public static $classMap = array (
         'App\\Controllers\\CoursesController' => __DIR__ . '/../..' . '/app/Controllers/CoursesController.php',
+        'App\\Controllers\\CustodiansController' => __DIR__ . '/../..' . '/app/Controllers/CustodiansController.php',
         'App\\Controllers\\EnrollmentsController' => __DIR__ . '/../..' . '/app/Controllers/EnrollmentsController.php',
         'App\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Controllers/HomeController.php',
         'App\\Controllers\\InstructorsController' => __DIR__ . '/../..' . '/app/Controllers/InstructorsController.php',
@@ -37,10 +38,12 @@ class ComposerStaticInited9089a790e3a02864e0b8a9795bfb80
         'App\\Core\\Url' => __DIR__ . '/../..' . '/app/Core/Url.php',
         'App\\Core\\Validator' => __DIR__ . '/../..' . '/app/Core/Validator.php',
         'App\\Entities\\Course' => __DIR__ . '/../..' . '/app/Entities/Course.php',
+        'App\\Entities\\Custodian' => __DIR__ . '/../..' . '/app/Entities/Custodian.php',
         'App\\Entities\\Enrollment' => __DIR__ . '/../..' . '/app/Entities/Enrollment.php',
         'App\\Entities\\Instructor' => __DIR__ . '/../..' . '/app/Entities/Instructor.php',
         'App\\Entities\\Student' => __DIR__ . '/../..' . '/app/Entities/Student.php',
         'App\\Models\\CourseModel' => __DIR__ . '/../..' . '/app/Models/CourseModel.php',
+        'App\\Models\\CustodianModel' => __DIR__ . '/../..' . '/app/Models/CustodianModel.php',
         'App\\Models\\EnrollmentModel' => __DIR__ . '/../..' . '/app/Models/EnrollmentModel.php',
         'App\\Models\\InstructorModel' => __DIR__ . '/../..' . '/app/Models/InstructorModel.php',
         'App\\Models\\StudentModel' => __DIR__ . '/../..' . '/app/Models/StudentModel.php',

@@ -11,7 +11,11 @@ class CustodianModel extends Model
 {
     public function all(): array
     {
-        return $this->db->query('SELECT * FROM custodians ORDER BY id DESC')->fetchAll();
+        $sql = 'SELECT c.*, i.first_name AS student_first, i.last_name AS student_last
+FROM custodians c
+LEFT JOIN students i ON i.id = c.student_id
+ORDER BY c.id DESC';
+        return $this->db->query($sql)->fetchAll();
     }
 
 
@@ -26,16 +30,16 @@ class CustodianModel extends Model
 
     public function create(Custodian $s): int
     {
-        $stmt = $this->db->prepare('INSERT INTO custodians(first_name,last_name,email) VALUES(:fn,:ln,:em) RETURNING id');
-        $stmt->execute(['fn'=>$s->first_name,'ln'=>$s->last_name,'em'=>$s->email]);
+        $stmt = $this->db->prepare('INSERT INTO custodians(first_name,last_name,student_id) VALUES(:fn,:ln,:isd) RETURNING id');
+        $stmt->execute(['fn'=>$s->first_name,'ln'=>$s->last_name,'isd'=>$s->student_id]);
         return (int)$stmt->fetchColumn();
     }
 
     public function update(int $id, array $data): bool
     {
-        $stmt = $this->db->prepare('UPDATE custodians SET first_name=:fn,last_name=:ln,email=:em, updated_at=NOW() WHERE id=:id');
+        $stmt = $this->db->prepare('UPDATE custodians SET first_name=:fn,last_name=:ln,updated_at=NOW(),student_id=:isd WHERE id=:id');
         return $stmt->execute([
-            'fn'=>$data['first_name'], 'ln'=>$data['last_name'], 'em'=>$data['email'], 'id'=>$id
+            'fn'=>$data['first_name'], 'ln'=>$data['last_name'],'isd'=>$data['student_id']??null, 'id'=>$id
         ]);
     }
 
@@ -52,7 +56,7 @@ class CustodianModel extends Model
             return (int)$this->db->query('SELECT COUNT(*) FROM custodians')->fetchColumn();
         }
         $st = $this->db->prepare("SELECT COUNT(*) FROM custodians
-        WHERE first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q");
+        WHERE first_name ILIKE :q OR last_name ILIKE :q");
         $st->execute(['q' => '%'.$q.'%']);
         return (int)$st->fetchColumn();
     }
@@ -67,7 +71,7 @@ class CustodianModel extends Model
             return $st->fetchAll();
         }
         $st = $this->db->prepare("SELECT * FROM custodians
-        WHERE first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q
+        WHERE first_name ILIKE :q OR last_name ILIKE :q
         ORDER BY id DESC LIMIT :lim OFFSET :off");
         $st->bindValue(':q', '%'.$q.'%');
         $st->bindValue(':lim', $limit, \PDO::PARAM_INT);

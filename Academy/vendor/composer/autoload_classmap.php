@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Controllers\\CoursesController' => $baseDir . '/app/Controllers/CoursesController.php',
+    'App\\Controllers\\CustodiansController' => $baseDir . '/app/Controllers/CustodiansController.php',
     'App\\Controllers\\EnrollmentsController' => $baseDir . '/app/Controllers/EnrollmentsController.php',
     'App\\Controllers\\HomeController' => $baseDir . '/app/Controllers/HomeController.php',
     'App\\Controllers\\InstructorsController' => $baseDir . '/app/Controllers/InstructorsController.php',
@@ -22,10 +23,12 @@ return array(
     'App\\Core\\Url' => $baseDir . '/app/Core/Url.php',
     'App\\Core\\Validator' => $baseDir . '/app/Core/Validator.php',
     'App\\Entities\\Course' => $baseDir . '/app/Entities/Course.php',
+    'App\\Entities\\Custodian' => $baseDir . '/app/Entities/Custodian.php',
     'App\\Entities\\Enrollment' => $baseDir . '/app/Entities/Enrollment.php',
     'App\\Entities\\Instructor' => $baseDir . '/app/Entities/Instructor.php',
     'App\\Entities\\Student' => $baseDir . '/app/Entities/Student.php',
     'App\\Models\\CourseModel' => $baseDir . '/app/Models/CourseModel.php',
+    'App\\Models\\CustodianModel' => $baseDir . '/app/Models/CustodianModel.php',
     'App\\Models\\EnrollmentModel' => $baseDir . '/app/Models/EnrollmentModel.php',
     'App\\Models\\InstructorModel' => $baseDir . '/app/Models/InstructorModel.php',
     'App\\Models\\StudentModel' => $baseDir . '/app/Models/StudentModel.php',

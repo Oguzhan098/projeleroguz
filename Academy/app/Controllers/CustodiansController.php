@@ -1,22 +1,27 @@
 <?php
 namespace App\Controllers;
 
-use App\{Core\Controller,
-    Core\Flash,
-    Core\Csrf,
-    Core\Request,
-    Entities\Custodian,
-    Models\CustodianModel,
-    Core\Url,
-    Core\Helpers};
+use App\Core\Controller;
+use App\Core\Flash;
+use App\Core\Csrf;
+use App\Core\Request;
+use App\Entities\Custodian;
+use App\Entities\Student;
+use App\Models\CustodianModel;
+use App\Models\StudentModel;
+use App\Core\Url;
+use App\Core\Helpers;
 
-class CustodianController extends Controller
+
+class CustodiansController extends Controller
 {
     private CustodianModel $model;
+    private StudentModel $students;
 
     public function __construct()
     {
         $this->model = new CustodianModel();
+        $this->students = new StudentModel();
     }
 
     public function index(): void
@@ -29,11 +34,11 @@ class CustodianController extends Controller
         $page  = min($page, $pages);
         $offset = ($page - 1) * $limit;
 
-        $custodian = $this->model->searchPaginated($q, $limit, $offset);
+        $custodians = $this->model->searchPaginated($q, $limit, $offset);
 
-        $this->render('custodian/index', [
+        $this->render('custodians/index', [
             'title'    => 'Veliler',
-            'custodian' => $custodian,
+            'custodians' => $custodians,
             'q'        => $q,
             'page'     => $page,
             'pages'    => $pages,
@@ -44,25 +49,30 @@ class CustodianController extends Controller
     public function show(): void
     {
         $id = (int)($_GET['id'] ?? 0);
-        $custodian = $this->model->find($id);
-        if (!$custodian) {
+        $custodians = $this->model->find($id);
+        if (!$custodians) {
             Flash::set('error', 'Veli bulunamadı.');
             header('Location: /index.php?r=custodians/index');
             return;
         }
-        $this->render('custodian/show', [ 'title' => 'Veli Detayı', 'custodian' => $custodian ]);
+        $this->render('custodians/show', [ 'title' => 'Veli Detayı', 'custodians' => $custodians ]);
     }
 
     public function create(): void
     {
-        $this->render('custodian/create', [ 'title' => 'Yeni Veli', 'csrf' => Csrf::token() ]);
+        $this->render(
+            'custodians/create', [ 'title' => 'Yeni Veli', 
+                'csrf' => Csrf::token(),
+                'students' => $this->students->all()
+            ]);
+        
     }
 
     public function store(): void
     {
         if (!Csrf::check($_POST['csrf'] ?? null)) {
             Flash::set('error', 'Oturum süresi dolmuş olabilir. Lütfen tekrar deneyin.');
-            header('Location: /index.php?r=custodian/create');
+            header('Location: /index.php?r=custodians/create');
             return;
         }
 
@@ -71,26 +81,28 @@ class CustodianController extends Controller
         if ($data['errors']) {
             $_SESSION['old'] = $data['old'];
             $_SESSION['errors'] = $data['errors'];
-            header('Location: /index.php?r=custodian/create');
+            header('Location: /index.php?r=custodians/create');
             return;
         }
 
-        $custodian = new Custodian($data['old']['first_name'], $data['old']['last_name'], $data['old']['email']);
-        $id = $this->model->create($custodian);
+        $custodians = new Custodian($data['old']['first_name'], $data['old']['last_name']);
+        $custodians->student_id = $data['old']['student_id'] ?: null;
+
+        $id = $this->model->create($custodians);
         Flash::set('success', 'Veli oluşturuldu.');
-        header('Location: /index.php?r=custodian/show&id=' . $id);
+        header('Location: /index.php?r=custodians/show&id=' . $id);
     }
 
     public function edit(): void
     {
         $id = (int)($_GET['id'] ?? 0);
-        $custodian = $this->model->find($id);
-        if (!$custodian) {
+        $custodians = $this->model->find($id);
+        if (!$custodians) {
             Flash::set('error', 'Veli bulunamadı.');
             header('Location: /index.php?r=custodians/index');
             return;
         }
-        $this->render('custodian/edit', [ 'title' => 'Veli Düzenle', 'custodian' => $custodian, 'csrf' => Csrf::token() ]);
+        $this->render('custodians/edit', [ 'title' => 'Veli Düzenle', 'custodians' => $custodians, 'csrf' => Csrf::token(), 'students' => $this->students->all() ]);
     }
 
     public function update(): void
@@ -98,19 +110,19 @@ class CustodianController extends Controller
         $id = (int)($_GET['id'] ?? 0);
         if (!Csrf::check($_POST['csrf'] ?? null)) {
             Flash::set('error', 'Oturum süresi dolmuş olabilir.');
-            header('Location: /index.php?r=custodian/edit&id=' . $id);
+            header('Location: /index.php?r=custodians/edit&id=' . $id);
             return;
         }
         $data = $this->validate($_POST);
         if ($data['errors']) {
             $_SESSION['old'] = $data['old'];
             $_SESSION['errors'] = $data['errors'];
-            header('Location: /index.php?r=custodian/edit&id=' . $id);
+            header('Location: /index.php?r=custodians/edit&id=' . $id);
             return;
         }
         $ok = $this->model->update($id, $data['old']);
         $ok ? Flash::set('success', 'Veli güncellendi.') : Flash::set('error', 'Güncelleme başarısız.');
-        header('Location: /index.php?r=custodian/show&id=' . $id);
+        header('Location: /index.php?r=custodians/show&id=' . $id);
     }
 
     public function delete(): void
@@ -130,16 +142,15 @@ class CustodianController extends Controller
     {
         $first = trim($input['first_name'] ?? '');
         $last  = trim($input['last_name'] ?? '');
-
+        $isd   = (int)($input['student_id'] ?? 0);
+        
         $errors = [];
         if ($first === '') $errors['first_name'] = 'Ad zorunlu';
         if ($last === '')  $errors['last_name']  = 'Soyad zorunlu';
-        if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = 'Geçerli e-posta giriniz';
-        }
         return [
-            'old' => ['first_name'=>$first,'last_name'=>$last,'email'=>$email],
-            'errors' => $errors
+            'old' => ['first_name'=>$first,'last_name'=>$last],
+            'errors' => $errors,
+            'student_id'=> $isd
         ];
     }
 }
