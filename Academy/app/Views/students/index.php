@@ -1,4 +1,5 @@
 <?php use App\Core\Url; use App\Core\Helpers as H; ?>
+
 <article>
     <header style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
         <h3>Öğrenciler</h3>
@@ -12,6 +13,7 @@
     </header>
 
     <small><?= (int)($total ?? 0) ?> kayıt bulundu</small>
+
 
     <table>
         <thead>
@@ -36,6 +38,7 @@
         <?php endforeach; ?>
         </tbody>
     </table>
+
 
     <?php if (($pages ?? 1) > 1): ?>
         <nav aria-label="Sayfalama" style="display:flex;gap:.4rem;justify-content:flex-end;">

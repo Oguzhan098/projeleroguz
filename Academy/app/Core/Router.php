@@ -19,6 +19,7 @@ class Router
             'instructors' => 'Instructors',
             'enrollments' => 'Enrollments',
             'custodians' => 'Custodians',
+            'achievements' => 'Achievements',
         ];
         $controllerNorm = $map[strtolower($controller)] ?? ucfirst(strtolower($controller));
 

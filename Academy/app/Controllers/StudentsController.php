@@ -9,6 +9,10 @@ use App\Entities\Student;
 use App\Models\StudentModel;
 use App\Core\Url;
 use App\Core\Helpers;
+use App\Core\Validator;
+use App\Core\Router;
+use App\Core\Database;
+use App\Core\Model;
 
 class StudentsController extends Controller
 {
