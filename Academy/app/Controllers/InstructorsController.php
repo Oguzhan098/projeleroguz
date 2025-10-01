@@ -50,7 +50,6 @@ class InstructorsController extends Controller
         ]);
     }
 
-    // POST /index.php?r=instructors/store
     public function store(): void
     {
         if (!Csrf::check($_POST['csrf'] ?? null)) {

@@ -1,14 +1,24 @@
+
 <?php use App\Core\Url;
+
 use App\Core\Helpers as H; ?>
+
 <article>
+
     <header style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
+
         <h3>Veliler</h3>
+
         <form method="get" action="/index.php" style="display:flex;gap:.5rem;">
+
             <input type="hidden" name="r" value="custodians/index">
-            <input type="search" name="q" placeholder="ad, soyad" value="<?= H::e($q ?? '') ?>">
+            <input type="search" name="q" placeholder="ad, soyad, öğrenci" value="<?= H::e($q ?? '') ?>">
+
             <button type="submit" class="secondary">Ara</button>
+
             <a role="button" href="<?= Url::to('custodians/index') ?>" class="secondary">Sıfırla</a>
-            <a role="button" href="<?= Url::to('custodians/create') ?>">Yeni Öğrenci</a>
+            <a role="button" href="<?= Url::to('custodians/create') ?>">Yeni Veli</a>
+
         </form>
     </header>
 
@@ -16,7 +26,13 @@ use App\Core\Helpers as H; ?>
 
     <table>
         <thead>
-        <tr><th>ID</th><th>Ad</th><th>Soyad</th><th>Öğrenci</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Öğrenci</th>
+            <th>İşlemler</th>
+        </tr>
         </thead>
         <tbody>
         <?php foreach (($custodians ?? []) as $s): ?>
@@ -24,7 +40,16 @@ use App\Core\Helpers as H; ?>
                 <td><?= (int)$s['id'] ?></td>
                 <td><?= H::e($s['first_name']) ?></td>
                 <td><?= H::e($s['last_name']) ?></td>
-                <td><?= htmlspecialchars(($c['student_first'] ?? '') . ' ' . ($c['student_last'] ?? '')) ?></td>
+
+                <td>
+                    <?php if (!empty($s['student_full'])): ?>
+                        <?= H::e($s['student_full']) ?>
+                        <small class="text-muted">(ID: <?= (int)$s['student_id'] ?>)</small>
+                    <?php else: ?>
+                        <em>Öğrenci yok</em>
+                    <?php endif; ?>
+                </td>
+
                 <td>
                     <a href="<?= Url::to('custodians/show', ['id'=>$s['id']]) ?>">Göster</a>
                     <a href="<?= Url::to('custodians/edit', ['id'=>$s['id']]) ?>">Düzenle</a>

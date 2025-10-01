@@ -76,17 +76,16 @@ class CustodiansController extends Controller
             return;
         }
 
-
         $data = $this->validate($_POST);
         if ($data['errors']) {
-            $_SESSION['old'] = $data['old'];
+            $_SESSION['old']    = $data['old'];
             $_SESSION['errors'] = $data['errors'];
             header('Location: /index.php?r=custodians/create');
             return;
         }
 
         $custodians = new Custodian($data['old']['first_name'], $data['old']['last_name']);
-        $custodians->student_id = $data['old']['student_id'] ?: null;
+        $custodians->student_id = $data['old']['student_id'] ?: null; // artık set oluyor
 
         $id = $this->model->create($custodians);
         Flash::set('success', 'Veli oluşturuldu.');
@@ -115,11 +114,12 @@ class CustodiansController extends Controller
         }
         $data = $this->validate($_POST);
         if ($data['errors']) {
-            $_SESSION['old'] = $data['old'];
+            $_SESSION['old']    = $data['old'];
             $_SESSION['errors'] = $data['errors'];
             header('Location: /index.php?r=custodians/edit&id=' . $id);
             return;
         }
+
         $ok = $this->model->update($id, $data['old']);
         $ok ? Flash::set('success', 'Veli güncellendi.') : Flash::set('error', 'Güncelleme başarısız.');
         header('Location: /index.php?r=custodians/show&id=' . $id);
@@ -143,14 +143,14 @@ class CustodiansController extends Controller
         $first = trim($input['first_name'] ?? '');
         $last  = trim($input['last_name'] ?? '');
         $isd   = (int)($input['student_id'] ?? 0);
-        
+
         $errors = [];
         if ($first === '') $errors['first_name'] = 'Ad zorunlu';
         if ($last === '')  $errors['last_name']  = 'Soyad zorunlu';
+
         return [
-            'old' => ['first_name'=>$first,'last_name'=>$last],
+            'old'    => ['first_name' => $first, 'last_name' => $last, 'student_id' => $isd],
             'errors' => $errors,
-            'student_id'=> $isd
         ];
     }
 }

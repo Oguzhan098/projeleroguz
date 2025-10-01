@@ -51,6 +51,8 @@ CREATE TABLE IF NOT EXISTS custodians (
 
 
 
+
+
 -- Faydalı indexler
 CREATE INDEX IF NOT EXISTS idx_courses_instructor ON courses(instructor_id);
 CREATE INDEX IF NOT EXISTS idx_enrollments_student ON enrollments(student_id);

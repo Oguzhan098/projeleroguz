@@ -23,7 +23,6 @@ class EnrollmentsController extends Controller
         $this->courses     = new CourseModel();
     }
 
-    // Liste
     public function index(): void
     {
         $data = $this->enrollments->all();
@@ -33,7 +32,6 @@ class EnrollmentsController extends Controller
         ]);
     }
 
-    // Yeni kayıt formu
     public function create(): void
     {
         $this->render('enrollments/create', [
@@ -44,7 +42,6 @@ class EnrollmentsController extends Controller
         ]);
     }
 
-    // Kayıt oluştur
     public function store(): void
     {
         if (!Csrf::check($_POST['csrf'] ?? null)) {
@@ -78,7 +75,6 @@ class EnrollmentsController extends Controller
         }
     }
 
-    // Not güncelle (inline)
     public function updateGrade(): void
     {
         if (!Csrf::check($_POST['csrf'] ?? null)) {
