@@ -1,7 +1,6 @@
 <?php
 namespace App\Core;
 
-
 class Router
 {
     public function dispatch(): void
@@ -13,16 +12,19 @@ class Router
         $action     = preg_replace('/[^a-z0-9]/i', '', (string)$action) ?: 'index';
 
         $map = [
-            'home'        => 'Home',
-            'students'    => 'Students',
-            'courses'     => 'Courses',
-            'instructors' => 'Instructors',
-            'enrollments' => 'Enrollments',
-            'custodians' => 'Custodians',
+            'home'         => 'Home',
+            'students'     => 'Students',
+            'courses'      => 'Courses',
+            'instructors'  => 'Instructors',
+            'enrollments'  => 'Enrollments',
+            'custodians'   => 'Custodians',
             'achievements' => 'Achievements',
+            'departments'  => 'Departments',
+            'department'   => 'Departments',
+            'departmant'   => 'Departments',
         ];
-        $controllerNorm = $map[strtolower($controller)] ?? ucfirst(strtolower($controller));
 
+        $controllerNorm  = $map[strtolower($controller)] ?? ucfirst(strtolower($controller));
         $controllerClass = 'App\\Controllers\\' . $controllerNorm . 'Controller';
 
         error_log("[Router] r={$route}");
@@ -43,7 +45,4 @@ class Router
         }
         $controllerObj->$action();
     }
-
-
-
 }

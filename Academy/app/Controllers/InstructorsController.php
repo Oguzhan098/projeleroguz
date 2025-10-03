@@ -14,9 +14,11 @@ class InstructorsController extends Controller
     public function __construct()
     {
         $this->model = new InstructorModel();
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
     }
 
-    // /index.php?r=instructors/index
     public function index(): void
     {
         $instructors = $this->model->all();
@@ -26,7 +28,6 @@ class InstructorsController extends Controller
         ]);
     }
 
-    // /index.php?r=instructors/show&id=1
     public function show(): void
     {
         $id = (int)($_GET['id'] ?? 0);
@@ -41,12 +42,16 @@ class InstructorsController extends Controller
         ]);
     }
 
-    // /index.php?r=instructors/create
     public function create(): void
     {
+        $errors = $_SESSION['errors'] ?? []; unset($_SESSION['errors']);
+        $old    = $_SESSION['old']    ?? []; unset($_SESSION['old']);
+
         $this->render('instructors/create', [
-            'title' => 'Yeni Eğitmen',
-            'csrf'  => Csrf::token()
+            'title'  => 'Yeni Eğitmen',
+            'csrf'   => Csrf::token(),
+            'errors' => $errors,
+            'old'    => $old,
         ]);
     }
 
@@ -69,17 +74,29 @@ class InstructorsController extends Controller
         }
 
         if ($errors) {
-            $_SESSION['old'] = compact('first','last','email');
+            $_SESSION['old']    = ['first_name'=>$first,'last_name'=>$last,'email'=>$email];
             $_SESSION['errors'] = $errors;
             header('Location: /index.php?r=instructors/create'); return;
         }
 
-        $id = $this->model->create(new Instructor($first, $last, $email));
-        Flash::set('success', 'Eğitmen oluşturuldu.');
-        header('Location: /index.php?r=instructors/show&id=' . $id);
+        try {
+            $id = $this->model->create(new Instructor($first, $last, $email));
+            Flash::set('success', 'Eğitmen oluşturuldu.');
+            header('Location: /index.php?r=instructors/show&id='.$id);
+        } catch (\PDOException $e) {
+            // PostgreSQL UNIQUE ihlali
+            if ($e->getCode() === '23505') {
+                $_SESSION['errors'] = ['email' => 'Bu e-posta zaten kayıtlı.'];
+            } else {
+                // Hata ayıklama için logla
+                error_log('Instructor store error: '.$e->getCode().' '.$e->getMessage());
+                $_SESSION['errors'] = ['general' => 'Kayıt sırasında beklenmeyen hata.'];
+            }
+            $_SESSION['old'] = ['first_name'=>$first,'last_name'=>$last,'email'=>$email];
+            header('Location: /index.php?r=instructors/create'); return;
+        }
     }
 
-    // /index.php?r=instructors/edit&id=1
     public function edit(): void
     {
         $id = (int)($_GET['id'] ?? 0);
@@ -88,20 +105,25 @@ class InstructorsController extends Controller
             Flash::set('error', 'Eğitmen bulunamadı.');
             header('Location: /index.php?r=instructors/index'); return;
         }
+
+        $errors = $_SESSION['errors'] ?? []; unset($_SESSION['errors']);
+        $old    = $_SESSION['old']    ?? []; unset($_SESSION['old']);
+
         $this->render('instructors/edit', [
             'title' => 'Eğitmen Düzenle',
             'instructor' => $instructor,
-            'csrf' => Csrf::token()
+            'csrf' => Csrf::token(),
+            'errors' => $errors,
+            'old' => $old,
         ]);
     }
 
-    // POST /index.php?r=instructors/update&id=1
     public function update(): void
     {
         $id = (int)($_GET['id'] ?? 0);
         if (!Csrf::check($_POST['csrf'] ?? null)) {
             Flash::set('error', 'CSRF hatası.');
-            header('Location: /index.php?r=instructors/edit&id=' . $id); return;
+            header('Location: /index.php?r=instructors/edit&id='.$id); return;
         }
 
         $first = trim((string)($_POST['first_name'] ?? ''));
@@ -116,24 +138,30 @@ class InstructorsController extends Controller
         }
 
         if ($errors) {
-            $_SESSION['old'] = compact('first','last','email');
+            $_SESSION['old']    = ['first_name'=>$first,'last_name'=>$last,'email'=>$email];
             $_SESSION['errors'] = $errors;
-            header('Location: /index.php?r=instructors/edit&id=' . $id); return;
+            header('Location: /index.php?r=instructors/edit&id='.$id); return;
         }
 
-        $ok = $this->model->update($id, [
-            'first_name' => $first,
-            'last_name'  => $last,
-            'email'      => $email
-        ]);
-
-        $ok ? Flash::set('success', 'Eğitmen güncellendi.')
-            : Flash::set('error', 'Güncelleme başarısız.');
-
-        header('Location: /index.php?r=instructors/show&id=' . $id);
+        try {
+            $ok = $this->model->update($id, [
+                'first_name'=>$first, 'last_name'=>$last, 'email'=>$email
+            ]);
+            $ok ? Flash::set('success', 'Eğitmen güncellendi.')
+                : Flash::set('error', 'Güncelleme başarısız.');
+            header('Location: /index.php?r=instructors/show&id='.$id);
+        } catch (\PDOException $e) {
+            if ($e->getCode() === '23505') {
+                $_SESSION['errors'] = ['email' => 'Bu e-posta zaten kayıtlı.'];
+            } else {
+                error_log('Instructor update error: '.$e->getCode().' '.$e->getMessage());
+                $_SESSION['errors'] = ['general' => 'Güncelleme sırasında beklenmeyen hata.'];
+            }
+            $_SESSION['old'] = ['first_name'=>$first,'last_name'=>$last,'email'=>$email];
+            header('Location: /index.php?r=instructors/edit&id='.$id); return;
+        }
     }
 
-    // POST /index.php?r=instructors/delete&id=1
     public function delete(): void
     {
         $id = (int)($_GET['id'] ?? 0);

@@ -4,10 +4,10 @@ namespace App\Entities;
 
 class Custodian
 {
-    public ?int $id = null;
+    public ?int $id =   null;
     public string $first_name;
     public string $last_name;
-    public ?string $registered_at = null;
+    public ?string $registered_at =  null;
     public ?int $student_id = null;
 
 

@@ -19,10 +19,12 @@ ORDER BY e.id DESC';
         return $this->db->query($sql)->fetchAll();
     }
 
-
     public function create(Enrollment $e): int
     {
-        $st = $this->db->prepare('INSERT INTO enrollments(student_id,course_id,grade) VALUES(:sid,:cid,:gr) RETURNING id');
+        $st = $this->db->prepare(
+            'INSERT INTO enrollments(student_id,course_id,grade) 
+                VALUES(:sid,:cid,:gr) RETURNING id');
+
         $st->execute(['sid'=>$e->student_id, 'cid'=>$e->course_id, 'gr'=>$e->grade]);
         return (int)$st->fetchColumn();
     }

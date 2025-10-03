@@ -8,7 +8,7 @@ class Student
     public string $first_name;
     public string $last_name;
     public string $email;
-    public ?string $registered_at = null; // Y-m-d
+    public ?string $registered_at = null;
 
 
     public function __construct(string $first_name, string $last_name, string $email)

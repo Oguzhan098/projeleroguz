@@ -23,25 +23,28 @@ class CustodiansController extends Controller
 
     public function index(): void
     {
-        $q     = trim((string)Request::get('q', ''));
-        $page  = max(1, (int)Request::get('page', 1));
-        $limit = 10;
+        $q = trim((string)($_GET['q'] ?? ''));
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $per  = 10;
         $total = $this->model->searchCount($q);
-        $pages = max(1, (int)ceil($total / $limit));
+        $pages = max(1, (int)ceil($total / $per));
         $page  = min($page, $pages);
-        $offset = ($page - 1) * $limit;
+        $rows  = $this->model->searchPaginated($q, $per, ($page-1)*$per);
 
-        $custodians = $this->model->searchPaginated($q, $limit, $offset);
 
-        $this->render('custodians/index', [
-            'title'    => 'Veliler',
-            'custodians' => $custodians,
-            'q'        => $q,
-            'page'     => $page,
-            'pages'    => $pages,
-            'total'    => $total,
-        ]);
+        $deptIds = array_map(fn($r) => (int)$r['id'], $rows);
+        $rels = $this->model->relationsFor($deptIds, 5);
+
+        $this->render('departments/index', [
+            'q' => $q,
+            'rows' => $rows,
+            'page' => $page,
+            'pages' => $pages,
+            'total' => $total,
+            'rels' => $rels,
+            ]  );
     }
+
 
     public function show(): void
     {
@@ -52,7 +55,8 @@ class CustodiansController extends Controller
             header('Location: /index.php?r=custodians/index');
             return;
         }
-        $this->render('custodians/show', [ 'title' => 'Veli Detayı', 'custodians' => $custodians ]);
+        $this->render('custodians/show',
+            [ 'title' => 'Veli Detayı', 'custodians' => $custodians ]);
     }
 
     public function create(): void

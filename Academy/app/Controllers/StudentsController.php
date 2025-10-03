@@ -71,7 +71,7 @@ class StudentsController extends Controller
         }
 
 
-        $data = $this->validate($_POST);
+       $data = $this->validate($_POST);
         if ($data['errors']) {
             $_SESSION['old'] = $data['old'];
             $_SESSION['errors'] = $data['errors'];

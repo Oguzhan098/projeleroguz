@@ -7,7 +7,6 @@
             <input type="hidden" name="r" value="students/index">
             <input type="search" name="q" placeholder="ad, soyad, e-posta" value="<?= H::e($q ?? '') ?>">
             <button type="submit" class="secondary">Ara</button>
-            <a role="button" href="<?= Url::to('students/index') ?>" class="secondary">Sıfırla</a>
             <a role="button" href="<?= Url::to('students/create') ?>">Yeni Öğrenci</a>
         </form>
     </header>

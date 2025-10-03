@@ -49,16 +49,24 @@ class CustodianModel extends Model
 
     public function create(Custodian $s): int
     {
-        $stmt = $this->db->prepare('INSERT INTO custodians(first_name,last_name,student_id) VALUES(:fn,:ln,:isd) RETURNING id');
+        $stmt = $this->db->prepare(
+            'INSERT INTO custodians(first_name,last_name,student_id) 
+                    VALUES(:fn,:ln,:isd) RETURNING id');
         $stmt->execute(['fn'=>$s->first_name,'ln'=>$s->last_name,'isd'=>$s->student_id]);
         return (int)$stmt->fetchColumn();
     }
 
     public function update(int $id, array $data): bool
     {
-        $stmt = $this->db->prepare('UPDATE custodians SET first_name=:fn,last_name=:ln,updated_at=NOW(),student_id=:isd WHERE id=:id');
+        $stmt = $this->db->prepare(
+            'UPDATE custodians 
+                    SET first_name=:fn,last_name=:ln,updated_at=NOW(),student_id=:isd 
+                    WHERE id=:id');
         return $stmt->execute([
-            'fn'=>$data['first_name'], 'ln'=>$data['last_name'],'isd'=>$data['student_id']??null, 'id'=>$id
+            'fn'=>$data['first_name'],
+            'ln'=>$data['last_name'],
+            'isd'=>$data['student_id']??null,
+            'id'=>$id
         ]);
     }
 
@@ -121,5 +129,98 @@ class CustodianModel extends Model
         $st->execute();
         return $st->fetchAll();
     }
+    public function relationsFor(array $deptIds, int $limitPerType = 5): array
+    {
+        if (empty($deptIds)) {
+            return [
+                'students' => [], 'students_count' => [],
+                'instructors' => [], 'instructors_count' => [],
+            ];
+        }
+
+        // IN klausulü için placeholder üret
+        $params = [];
+        $ph = [];
+        foreach ($deptIds as $i => $id) {
+            $key = ':d' . $i;
+            $params[$key] = (int)$id;
+            $ph[] = $key;
+        }
+        $inClause = '(' . implode(',', $ph) . ')';
+
+        $sqlCntStu = "SELECT department_id, COUNT(*) AS cnt
+                  FROM students
+                  WHERE department_id IN $inClause
+                  GROUP BY department_id";
+        $st = $this->db->prepare($sqlCntStu);
+        foreach ($params as $k=>$v) $st->bindValue($k, $v, PDO::PARAM_INT);
+        $st->execute();
+        $students_count = [];
+        foreach ($st->fetchAll(PDO::FETCH_ASSOC) as $r) {
+            $students_count[(int)$r['department_id']] = (int)$r['cnt'];
+        }
+
+        $sqlCntIns = "SELECT department_id, COUNT(*) AS cnt
+                  FROM instructors
+                  WHERE department_id IN $inClause
+                  GROUP BY department_id";
+        $st = $this->db->prepare($sqlCntIns);
+        foreach ($params as $k=>$v) $st->bindValue($k, $v, PDO::PARAM_INT);
+        $st->execute();
+        $instructors_count = [];
+        foreach ($st->fetchAll(PDO::FETCH_ASSOC) as $r) {
+            $instructors_count[(int)$r['department_id']] = (int)$r['cnt'];
+        }
+
+        $sqlStu = "
+      SELECT id, first_name, last_name, email, department_id
+      FROM (
+        SELECT s.*, ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY id DESC) AS rn
+        FROM students s
+        WHERE department_id IN $inClause
+      ) t
+      WHERE rn <= :lim
+      ORDER BY department_id, id DESC
+    ";
+        $st = $this->db->prepare($sqlStu);
+        foreach ($params as $k=>$v) $st->bindValue($k, $v, PDO::PARAM_INT);
+        $st->bindValue(':lim', $limitPerType, PDO::PARAM_INT);
+        $st->execute();
+        $students = [];
+        foreach ($st->fetchAll(PDO::FETCH_ASSOC) as $r) {
+            $dep = (int)$r['department_id'];
+            $students[$dep] ??= [];
+            $students[$dep][] = $r;
+        }
+
+        $sqlIns = "
+      SELECT id, first_name, last_name, email, department_id
+      FROM (
+        SELECT i.*, ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY id DESC) AS rn
+        FROM instructors i
+        WHERE department_id IN $inClause
+      ) t
+      WHERE rn <= :lim
+      ORDER BY department_id, id DESC
+    ";
+        $st = $this->db->prepare($sqlIns);
+        foreach ($params as $k=>$v) $st->bindValue($k, $v, PDO::PARAM_INT);
+        $st->bindValue(':lim', $limitPerType, PDO::PARAM_INT);
+        $st->execute();
+        $instructors = [];
+        foreach ($st->fetchAll(PDO::FETCH_ASSOC) as $r) {
+            $dep = (int)$r['department_id'];
+            $instructors[$dep] ??= [];
+            $instructors[$dep][] = $r;
+        }
+
+        return [
+            'students' => $students,
+            'students_count' => $students_count,
+            'instructors' => $instructors,
+            'instructors_count' => $instructors_count,
+        ];
+    }
+
 
 }

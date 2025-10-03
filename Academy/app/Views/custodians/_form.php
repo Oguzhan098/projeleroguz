@@ -1,4 +1,5 @@
 <?php
+
 $old = $_SESSION['old'] ?? [];
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['old'], $_SESSION['errors']);
@@ -10,7 +11,9 @@ $isd   = $old['student_id'] ?? ($custodian['student_id'] ?? 0);
 <label>
     Ad
     <input name="first_name" value="<?= htmlspecialchars($first) ?>"/>
-    <?php if (!empty($errors['first_name'])): ?><small style="color:#e74c3c;"><?= htmlspecialchars($errors['first_name']) ?></small><?php endif; ?>
+    <?php if (!empty($errors['first_name'])): ?>
+        <small style="color:#e74c3c;"><?= htmlspecialchars($errors['first_name']) ?></small>
+    <?php endif; ?>
 </label>
 
 

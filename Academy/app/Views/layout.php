@@ -1,4 +1,4 @@
-<?php /* Basit layout. Pico.css CDN kullanıyoruz. */ ?>
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -23,20 +23,27 @@
 <li><a href="/index.php?r=instructors/index">Eğitmenler</a></li>
 <li><a href="/index.php?r=enrollments/index">Kayıtlar</a></li>
     <li><a href="/index.php?r=custodians/index">Veliler</a></li>
-    <li><a href="/index.php?r=achievements/index">Başarılar</a></li>
+    <li><a href="/index.php?r=departments/index">Departmanlar</a></li>
+
+
 </ul>
 </nav>
 </header>
+
 <main class="container">
     <?php if ($m = \App\Core\Flash::get('success')): ?>
+
         <div class="contrast" style="padding:.6rem 1rem;border-left:4px solid #2ecc71;margin-bottom:1rem;">
             <?= htmlspecialchars($m) ?>
         </div>
+
     <?php endif; ?>
     <?php if ($m = \App\Core\Flash::get('error')): ?>
+
         <div class="contrast" style="padding:.6rem 1rem;border-left:4px solid #e74c3c;margin-bottom:1rem;">
             <?= htmlspecialchars($m) ?>
         </div>
+
     <?php endif; ?>
     <?php if (isset($viewFile) && file_exists($viewFile)) { include $viewFile; } else { echo '<p>View bulunamadı.</p>'; } ?></main>
 <script src="/assets/js/app.js"></script>

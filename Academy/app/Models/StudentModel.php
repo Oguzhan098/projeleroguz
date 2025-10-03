@@ -22,8 +22,6 @@ class StudentModel extends Model
         $row = $stmt->fetch();
         return $row ?: null;
     }
-
-
     public function create(Student $s): int
     {
         $stmt = $this->db->prepare('INSERT INTO students(first_name,last_name,email) VALUES(:fn,:ln,:em) RETURNING id');
@@ -66,6 +64,7 @@ class StudentModel extends Model
             $st->execute();
             return $st->fetchAll();
         }
+
         $st = $this->db->prepare("SELECT * FROM students
         WHERE first_name ILIKE :q OR last_name ILIKE :q OR email ILIKE :q
         ORDER BY id DESC LIMIT :lim OFFSET :off");
