@@ -17,7 +17,6 @@ class DepartmentsController extends Controller
         if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
     }
 
-
     public function index(): void
     {
         $q    = trim((string)($_GET['q'] ?? ''));

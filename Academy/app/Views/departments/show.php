@@ -11,6 +11,7 @@
         <dt>Oluşturma</dt><dd><?= htmlspecialchars($department['created_at']) ?></dd>
         <dt>Güncelleme</dt><dd><?= htmlspecialchars($department['updated_at']) ?></dd>
     </dl>
+
     <p>
         <a href="/index.php?r=departments/edit&id=<?= (int)$department['id'] ?>">Düzenle</a> |
         <a href="/index.php?r=departments/index">Listeye Dön</a>
@@ -20,12 +21,17 @@
     <h2>İlişkilendir</h2>
 
 
-    <form method="post" action="/index.php?r=departments/linkStudent" style="display:inline-block;margin:4px 8px;min-width:360px">
+    <form method="post"
+          action="/index.php?r=departments/linkStudent"
+          style="display:inline-block;margin:4px 8px;min-width:360px">
+
         <input type="hidden" name="csrf" value="<?= \App\Core\Csrf::token() ?>">
         <input type="hidden" name="id" value="<?= (int)$department['id'] ?>">
 
+
         <select name="student_id" required style="width:100%;">
             <option value="">Öğrenci seçin...</option>
+
             <?php foreach (($studentOptions ?? []) as $s): ?>
                 <?php
                 $label = '#'.(int)$s['id'].' — '.htmlspecialchars($s['first_name'].' '.$s['last_name']).' ('.htmlspecialchars($s['email']).')';
@@ -37,10 +43,11 @@
             <?php endforeach; ?>
         </select>
 
+
         <button type="submit" style="width:100%;margin-top:8px;">Öğrenci Bağla</button>
     </form>
 
-    <!-- Eğitmen: BAĞLA (dropdown) -->
+
     <form method="post" action="/index.php?r=departments/linkInstructor" style="display:inline-block;margin:12px 8px;min-width:360px">
         <input type="hidden" name="csrf" value="<?= \App\Core\Csrf::token() ?>">
         <input type="hidden" name="id" value="<?= (int)$department['id'] ?>">
@@ -70,6 +77,7 @@
         </ul>
     <?php else: ?><p>Öğrenci yok.</p><?php endif; ?>
 
+
     <h3>Eğitmenler</h3>
     <?php if (!empty($instructors)): ?>
         <ul>
@@ -80,6 +88,8 @@
     <?php else: ?><p>Eğitmen yok.</p><?php endif; ?>
 
 <?php else: ?>
+
+
     <p>Kayıt bulunamadı.</p>
 <?php endif; ?>
 

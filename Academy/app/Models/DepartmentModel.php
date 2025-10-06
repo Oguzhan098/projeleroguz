@@ -33,7 +33,12 @@ class DepartmentModel extends Model
     public function update(int $id, array $data): bool
     {
         $st = $this->db->prepare(
-            'UPDATE departments SET code = :c, name = :n, description = :d, updated_at = NOW() WHERE id = :id'
+            'UPDATE departments SET 
+                       code = :c, 
+                       name = :n, 
+                       description = :d, 
+                       updated_at = NOW() WHERE 
+                        id = :id'
         );
         return $st->execute([
             ':c' => strtoupper($data['code']),
@@ -48,6 +53,8 @@ class DepartmentModel extends Model
         $st = $this->db->prepare('DELETE FROM departments WHERE id = :id');
         return $st->execute([':id' => $id]);
     }
+    // burada delete students ve instructors tablolarındaki departmant_id ilgili satırını Null yapacak
+
 
     public function searchCount(string $q): int
     {
@@ -81,7 +88,6 @@ class DepartmentModel extends Model
         return $st->fetchAll();
     }
 
-
     public function studentsOf(int $depId): array
     {
         $st = $this->db->prepare(
@@ -110,8 +116,6 @@ class DepartmentModel extends Model
                 'instructors' => [], 'instructors_count' => [],
             ];
         }
-
-
         $params = [];
         $ph = [];
         foreach ($deptIds as $i => $id) {
@@ -192,22 +196,10 @@ class DepartmentModel extends Model
         return $st->execute([':d' => $depId, ':i' => $studentId]);
     }
 
-    public function unlinkStudent(int $depId, int $studentId): bool
-    {
-        $st = $this->db->prepare('UPDATE students SET department_id = NULL WHERE id = :i AND department_id = :d');
-        return $st->execute([':i' => $studentId, ':d' => $depId]);
-    }
-
     public function linkInstructor(int $depId, int $instructorId): bool
     {
         $st = $this->db->prepare('UPDATE instructors SET department_id = :d WHERE id = :i');
         return $st->execute([':d' => $depId, ':i' => $instructorId]);
-    }
-
-    public function unlinkInstructor(int $depId, int $instructorId): bool
-    {
-        $st = $this->db->prepare('UPDATE instructors SET department_id = NULL WHERE id = :i AND department_id = :d');
-        return $st->execute([':i' => $instructorId, ':d' => $depId]);
     }
 
     public function candidateStudents(int $depId, int $limit = 500): array

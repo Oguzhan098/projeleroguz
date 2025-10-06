@@ -1,4 +1,5 @@
 <?php include VIEW_PATH . '/partials/header.php'; ?>
+
 <h1>Departmanlar</h1>
 
 <form method="get" action="/index.php" style="margin:10px 0;">
@@ -7,6 +8,7 @@
     <button type="submit">Ara</button>
     <a href="/index.php?r=departments/create">+ Yeni</a>
 </form>
+
 
 <table class="table">
     <thead>
@@ -19,11 +21,12 @@
     </tr>
     </thead>
     <tbody>
+
     <?php
-    // Güvenli fallback (controller 'rels' yollamazsa boş dizi kullan)
     $rels = $rels ?? ['students'=>[], 'students_count'=>[], 'instructors'=>[], 'instructors_count'=>[]];
     ?>
     <?php foreach ($rows as $r): ?>
+
         <?php
         $depId  = (int)$r['id'];
         $stuList = $rels['students'][$depId] ?? [];
@@ -50,7 +53,7 @@
             <td><?= htmlspecialchars($r['code']) ?></td>
             <td><?= htmlspecialchars($r['name']) ?></td>
 
-            <!-- İlişkiler sütunu -->
+
             <td>
                 <table class="subtable" style="border-collapse:collapse;width:100%;background:#fafafa;">
                     <tr>
@@ -64,7 +67,7 @@
                 </table>
             </td>
 
-            <!-- İşlem sütunu -->
+
             <td>
                 <a href="/index.php?r=departments/show&id=<?= $depId ?>">Göster</a> |
                 <a href="/index.php?r=departments/edit&id=<?= $depId ?>">Düzenle</a> |
@@ -74,6 +77,7 @@
                 </form>
             </td>
         </tr>
+
     <?php endforeach; ?>
     </tbody>
 </table>
